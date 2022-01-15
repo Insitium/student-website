@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-md-12">
+
+        <br>
+        <h2>Students</h2>
+
+        <a href="/students/add" class="btn btn-success float-right">Add New Student</a>
+        <br>
+        <hr />
+        <table class="table  table-hover">
+            <thead>
+                <tr>
+                    <th>Student Num</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Status</th>
+                    <th>Course ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each students}}
+                <tr>
+                    <td>{{this.studentNum}}</td>
+                    <td>{{#stuNumRedirect this.studentNum}}
+                        {{this.firstName}} {{this.lastName}}
+                        {{/stuNumRedirect}}
+                    </td>
+                    <td>{{#mailToStuEmail this.email}}
+                        {{this.email}}
+                        {{/mailToStuEmail}}
+                    </td>
+                    <td>{{this.addressStreet}} {{this.addressCity}} {{this.addressProvince}}</td>
+                    <td>{{this.status}}</td>
+                    <td>{{#stuCourseRedirect this.course}}
+                        {{this.course}}
+                        {{/stuCourseRedirect}}
+                    </td>
+                    <td><a href="/student/delete/{{this.studentNum}}" class="btn btn-danger">Remove</a></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        {{#unless students}}
+        <div class="col-md-12 text-center"></div>
+        <strong>{{message}}</strong>
+        {{/unless}}
+    </div>
+</div>
